@@ -1,1 +1,1 @@
-PHP exercises
+PHP exercise
