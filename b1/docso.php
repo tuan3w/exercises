@@ -1,12 +1,12 @@
 <?php
-
+	$num = "";
 	function digit2Char($dig){
 		switch ($dig) {
 			case '0':
-				return "khong";
+				return "không";
 				break;
 			case 1:
-				return "Mot";
+				return "Một";
 				break;
 			case 2:
 				return "Hai";
@@ -15,22 +15,22 @@
 				return "Ba";
 				break;
 			case 4:
-				return "Bon";
+				return "Bốn";
 				break;
 			case 5:
-				return "Nam";
+				return "Năm";
 				break;
 			case 6:
-				return "Sau";
+				return "Sáu";
 				break;
 			case 7:
-				return "Bay";
+				return "Bảy";
 				break;
 			case 8:
-				return "Tam";
+				return "Tám";
 				break;
 			case 9:
-				return "Chin";
+				return "Chín";
 				break;
 		}
 	}
@@ -41,12 +41,12 @@
 			return digit2Char($num);
 		else if ($num <100){
 			if ($num == 10)
-				return " Muoi";
+				return "Mười";
 			if ($num % 10 == 0)
-				return digit2Char(floor($num/10))." Muoi";
+				return digit2Char(floor($num/10))." Mươi";
 			else if ( floor($num /10) ==1)
-				return "Muoi " . digit2Char($num %10);
-				return digit2Char(floor($num / 10))." Muoi ".digit2Char($num % 10);
+				return "Mười " . digit2Char($num %10);
+				return digit2Char(floor($num / 10))." Mươi ".digit2Char($num % 10);
 		}
 		else {
 			$dv = $num  %10;
@@ -55,22 +55,23 @@
 
 			if ($chuc == 0) {
 				if ($dv == 0)
-					return digit2Char($tram). " Tram";
+					return digit2Char($tram). " Trăm";
 				else
-					return digit2Char($tram). " Tram Linh ". digit2Char($dv);
+					return digit2Char($tram). " Trăm Linh ". digit2Char($dv);
 			}
 			else if ($dv == 0) 
-				return digit2Char($tram). " Tram ". digit2Char($chuc). " Muoi";
+				return digit2Char($tram). " Trăm ". digit2Char($chuc). " Mươi";
 			else if ($chuc == 1)
-				return digit2Char($tram). " Tram Muoi ". digit2Char($dv);
+				return digit2Char($tram). " Trăm Mười ". digit2Char($dv);
 			else
-				return digit2Char($tram). " Tram ". digit2Char($chuc). " Muoi ". digit2Char($dv);
+				return digit2Char($tram). " Trăm ". digit2Char($chuc). " Mươi ". digit2Char($dv);
 		}
 	}
 
-	if (isset($_POST['read_num'])){
+	if (isset($_POST['read_num']) && isset($_POST['num'])){
 		$num = $_POST['num'];
-		if (!is_numeric($num) || $num > 999 || $num < 0 || is_integer($num)){
+		echo is_float($num);
+		if ( $num > 999 || $num < 0 || !is_numeric($num) || strval(intval($num)) != $num ){
 			$error = true;
 			$text = "";
 		}else {
@@ -78,25 +79,31 @@
 			$text = num2String($num);
 		}
 	}else {
-		echo "error";
 		$error = false;
 		$text = "";
 	}
 ?>
-
+<html>
+<head>
+	<title> Đọc số </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+</head>
+<body>
 <form action="<?= $PHP_SELF; ?>" method="POST">
 	<table>
 		<tr>
-			<td>Nhap so (0->999)</td>
-			<td><input type='text' value='' name='num' /></td>
-			<td><input type='submit' value='Doc so' name='read_num'/></td>
+			<td>Nhập số (0->999)</td>
+			<td><input type='text'  name='num'  value="<?= $num ?>"/></td>
+			<td><input type='submit' value='Đọc số' name='read_num' /></td>
 		</tr>
 		<tr>
-			<td> Bang chu </td>
+			<td> Bằng chữ </td>
 			<td> <input type='text' value="<?= $text ?>"/> </td>
 		</tr>
 	</table>
 </form>
 <div id='info' style='color: red;'>
-	<?php if ($error) echo "Vui long nhap lai so 0->999" ?>
+	<?php if ($error) echo "Vui lòng nhập sô nguyên từ 0->999" ?> 
 </div>
+</body>
+</html>

@@ -28,22 +28,24 @@
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title> Tinh tien </title>
+	<title> Tính tiền </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 </head>
 <body>
 	<form action="<?= $PHP_SELF ?>" method="POST">
 	<table>
 	<tr>
-		<td>Gio bat dau:</td>
+		<td>Giờ bắt đầu:</td>
 		<td><input type='text' name='start' <?php if(isset($startTime)) echo "value='$startTime'"; ?>/>(h)</td>
 	</tr>
 	<tr>
-		<td>Gio ket thuc:</td>
+		<td>Giờ kết thúc:</td>
 		<td><input type='text' name='end'  <?php if(isset($endTime)) echo "value='$endTime'"; ?> />(h)</td>
 	</tr>
 	<tr>
-		<td>Tien thanh toan: </td>
+		<td>Tiền thanh toán: </td>
 	<?php
 		echo "<td><input type='text' name='total' value='$total'/>(VND)</td>";
 	?>
